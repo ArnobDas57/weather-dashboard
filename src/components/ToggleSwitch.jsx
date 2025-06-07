@@ -2,7 +2,6 @@ import React from "react";
 import { ToggleButton, ToggleButtonGroup, Box } from "@mui/material";
 
 const ToggleSwitch = ({ tempUnit, onTempChange }) => {
-
   const handleTempChange = (event, newTempUnit) => {
     if (newTempUnit !== null) {
       onTempChange(newTempUnit);
@@ -14,12 +13,12 @@ const ToggleSwitch = ({ tempUnit, onTempChange }) => {
       <Box
         sx={{
           display: "flex",
-          mt: -43,
           flexDirection: "column",
           alignItems: "center",
-          "& > *": {
-            m: -35,
-          },
+          justifyContent: "center",
+          mt: 4,
+          mb: 8,
+          width: "100%",
         }}
       >
         <ToggleButtonGroup

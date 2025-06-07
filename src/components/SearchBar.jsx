@@ -53,10 +53,9 @@ const SearchBar = ({
   return (
     <Box
       sx={{
-        height: "100vh",
         display: "flex",
         flexDirection: "column",
-        mt: -70,
+        mt: 4,
         mb: 2,
         width: "100%",
         justifyContent: "center",

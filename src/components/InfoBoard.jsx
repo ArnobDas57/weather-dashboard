@@ -25,23 +25,22 @@ const InfoBoard = ({
   temperature,
   icon,
   city,
-  tempUnit
+  tempUnit,
 }) => {
   return (
     <Box
       sx={{
         display: "flex",
-        transform: "translateY(-150px)",
         flexDirection: "column",
         alignItems: "center",
         maxWidth: "1000px",
         padding: 3,
         margin: "0 auto",
         borderRadius: "20px",
-        backgroundColor: "rgb(7, 147, 229)",
+        backgroundColor: "rgb(97, 185, 235)",
         boxShadow: "0 6px 20px rgba(23, 195, 172, 0.1)",
         color: "#333",
-        mb: -10
+        mb: { xs: 4, sm: 6, md: 8 },
       }}
     >
       <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, mb: 8 }}>
@@ -54,7 +53,10 @@ const InfoBoard = ({
             <Typography variant="h6" sx={{ fontWeight: 500, mb: 1 }}>
               <Thermometer /> Temperature
             </Typography>
-            <Typography variant="h4">{temperature}{tempUnit === "C" ? "°C" : "°F"}</Typography>
+            <Typography variant="h4">
+              {Math.round(temperature)}
+              {tempUnit === "C" ? "°C" : "°F"}
+            </Typography>
           </Item>
         </Grid>
 
@@ -63,17 +65,16 @@ const InfoBoard = ({
             <Typography variant="h6" sx={{ fontWeight: 500, mb: 1 }}>
               <Notebook /> Description
             </Typography>
-            <Typography variant="h5">
-              {weatherDescription}
-              {icon && (
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <img
-                    src={`http://openweathermap.org/img/wn/${icon}.png`}
-                    alt={weatherDescription}
-                  />
-                </Stack>
-              )}
-            </Typography>
+            <Typography variant="h5">{weatherDescription}</Typography>
+            {icon && (
+              <Box sx={{ mt: 1 }}>
+                <img
+                  src={`http://openweathermap.org/img/wn/${icon}.png`}
+                  alt={weatherDescription}
+                  style={{ width: 60, height: 60 }}
+                />
+              </Box>
+            )}
           </Item>
         </Grid>
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
 import axios from "axios";
 import SearchBar from "./components/SearchBar";
 import ToggleSwitch from "./components/ToggleSwitch";
@@ -90,7 +91,18 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <Box
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: city || errorMessage ? "flex-start" : "center",
+        minHeight: "100vh",
+        padding: "2rem",
+        boxSizing: "border-box",
+        background: "linear-gradient(to bottom,rgb(12, 37, 83),rgb(113, 143, 185))", // Optional: nice background
+      }}
+    >
       <Header />
       <SearchBar
         sendDataToParent={handleDataFromSearchBar}
@@ -102,6 +114,7 @@ function App() {
 
       {!city && !errorMessage && <WelcomeMessage />}
       {errorMessage && <Error errorMessage={errorMessage} />}
+      
       {city && !errorMessage && !isLoading && (
         <>
           <InfoBoard
@@ -116,7 +129,7 @@ function App() {
           <Forecastboard forecastData={forecastData} tempUnit={tempUnit} />
         </>
       )}
-    </div>
+    </Box>
   );
 }
 

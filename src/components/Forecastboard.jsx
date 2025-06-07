@@ -38,8 +38,8 @@ const groupDailyForecasts = (list) => {
     const temps = data.temps;
     return {
       date,
-      high: Math.max(...temps).toFixed(1),
-      low: Math.min(...temps).toFixed(1),
+      high: Math.max(...temps),
+      low: Math.min(...temps),
       icon: data.icon,
     };
   });
@@ -76,7 +76,7 @@ const Forecastboard = ({ forecastData, tempUnit }) => {
         padding: 3,
         margin: "0 auto",
         borderRadius: "20px",
-        backgroundColor: "rgba(77, 211, 226, 0.9)",
+        backgroundColor: "rgba(77, 211, 226, 0.69)",
         boxShadow: "0 6px 20px rgba(23, 195, 172, 0.1)",
         color: "#333",
       }}
@@ -104,11 +104,11 @@ const Forecastboard = ({ forecastData, tempUnit }) => {
               />
 
               <Typography variant="h6">
-                High: {high}
+                High: {high.toFixed(1)}
                 {tempUnit === "C" ? "°C" : "°F"}
               </Typography>
               <Typography variant="h6" sx={{ mt: 1 }}>
-                Low: {low}
+                Low: {low.toFixed(1)}
                 {tempUnit === "C" ? "°C" : "°F"}
               </Typography>
             </Item>
