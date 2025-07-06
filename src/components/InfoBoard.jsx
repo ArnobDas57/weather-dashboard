@@ -67,7 +67,7 @@ const InfoBoard = ({
             </Typography>
             <Typography variant="h5">{weatherDescription}</Typography>
             {icon && (
-              <Box sx={{ mt: 1 }}>
+              <Box sx={{ mt: 0.2 }}>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
                   alt={weatherDescription}

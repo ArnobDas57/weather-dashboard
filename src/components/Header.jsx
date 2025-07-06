@@ -1,18 +1,29 @@
 import React from "react";
 import { Typography } from "@mui/material";
+import { keyframes } from "@emotion/react";
+
+const gradientAnimation = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
 
 const Header = () => {
   return (
     <div>
       <Typography
-        color="primary.light"
         sx={{
-          textAlign: "center", // center horizontally
+          background:
+            "linear-gradient(90deg, #4079ff, #40ffaa, #4079ff, #40ffaa)",
+          backgroundSize: "200% 100%",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          textAlign: "center",
           fontSize: "36px",
           fontWeight: "bold",
           letterSpacing: "0.05em",
-          textShadow: "2px 2px 4px rgba(149, 228, 79, 0.87)",
           paddingY: 1,
+          animation: `${gradientAnimation} 3s linear infinite`,
         }}
       >
         WEATHER DASHBOARD

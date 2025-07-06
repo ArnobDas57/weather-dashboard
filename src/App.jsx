@@ -5,9 +5,11 @@ import SearchBar from "./components/SearchBar";
 import ToggleSwitch from "./components/ToggleSwitch";
 import Header from "./components/Header";
 import Error from "./components/Error";
+import Footer from "./components/Footer";
 import Forecastboard from "./components/Forecastboard";
 import InfoBoard from "./components/InfoBoard";
 import WelcomeMessage from "./components/WelcomeMessage";
+import Silk from "./components/Silk";
 
 function App() {
   const [city, setCity] = useState("");
@@ -91,45 +93,51 @@ function App() {
   }, []);
 
   return (
-    <Box
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: city || errorMessage ? "flex-start" : "center",
-        minHeight: "100vh",
-        padding: "2rem",
-        boxSizing: "border-box",
-        background: "linear-gradient(to bottom,rgb(12, 37, 83),rgb(113, 143, 185))", // Optional: nice background
-      }}
-    >
-      <Header />
-      <SearchBar
-        sendDataToParent={handleDataFromSearchBar}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        setErrorMessage={setErrorMessage}
-      />
-      <ToggleSwitch tempUnit={tempUnit} onTempChange={onTempChange} />
-
-      {!city && !errorMessage && <WelcomeMessage />}
-      {errorMessage && <Error errorMessage={errorMessage} />}
+    <>
       
-      {city && !errorMessage && !isLoading && (
-        <>
-          <InfoBoard
-            weatherDescription={weatherDescription}
-            windSpeed={windSpeed}
-            humidity={humidity}
-            temperature={temperature}
-            icon={icon}
-            city={city}
-            tempUnit={tempUnit}
-          />
-          <Forecastboard forecastData={forecastData} tempUnit={tempUnit} />
-        </>
-      )}
-    </Box>
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: city || errorMessage ? "flex-start" : "center",
+          minHeight: "100vh",
+          padding: "2rem",
+          boxSizing: "border-box",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <Header />
+
+        <SearchBar
+          sendDataToParent={handleDataFromSearchBar}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          setErrorMessage={setErrorMessage}
+        />
+        <ToggleSwitch tempUnit={tempUnit} onTempChange={onTempChange} />
+
+        {!city && !errorMessage && <WelcomeMessage />}
+        {errorMessage && <Error errorMessage={errorMessage} />}
+
+        {city && !errorMessage && !isLoading && (
+          <>
+            <InfoBoard
+              weatherDescription={weatherDescription}
+              windSpeed={windSpeed}
+              humidity={humidity}
+              temperature={temperature}
+              icon={icon}
+              city={city}
+              tempUnit={tempUnit}
+            />
+            <Forecastboard forecastData={forecastData} tempUnit={tempUnit} />
+          </>
+        )}
+      </Box>
+      <Footer />
+    </>
   );
 }
 
