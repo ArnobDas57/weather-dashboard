@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import theme from "./theme";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import App from "./App.jsx";
-import Silk from "./components/Silk";
+import Lightning from "./components/Lightning/Lightning.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -27,21 +27,18 @@ createRoot(document.getElementById("root")).render(
           },
         }}
       />
-      <Silk
-        speed={5}
-        scale={1}
-        color="#4A70E3"
-        noiseIntensity={1.5}
-        rotation={0}
-        sx={{
+      <div
+        style={{
           position: "fixed",
+          width: "100%",
+          height: "100%",
           top: 0,
           left: 0,
-          width: "100vw",
-          height: "100vh",
           zIndex: -1,
         }}
-      />
+      >
+        <Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
+      </div>
       <App />
     </ThemeProvider>
   </StrictMode>

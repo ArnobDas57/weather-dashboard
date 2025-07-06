@@ -16,8 +16,6 @@ const ToggleSwitch = ({ tempUnit, onTempChange }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          mt: 4,
-          mb: 8,
           width: "100%",
         }}
       >

@@ -37,9 +37,9 @@ const InfoBoard = ({
         padding: 3,
         margin: "0 auto",
         borderRadius: "20px",
-        backgroundColor: "rgb(97, 185, 235)",
+        backgroundColor: "rgba(97, 185, 235, 0.56)",
         boxShadow: "0 6px 20px rgba(23, 195, 172, 0.1)",
-        color: "#333",
+        color: "white",
         mb: { xs: 4, sm: 6, md: 8 },
       }}
     >

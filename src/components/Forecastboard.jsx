@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 // Styled Card
 const Item = styled(Paper)(() => ({
-  backgroundColor: "rgba(107, 189, 227, 0.9)",
+  backgroundColor: "rgba(107, 227, 123, 0.9)",
   padding: "20px",
   color: "rgba(0, 0, 0, 0.87)",
   textAlign: "center",
@@ -76,9 +76,9 @@ const Forecastboard = ({ forecastData, tempUnit }) => {
         padding: 3,
         margin: "0 auto",
         borderRadius: "20px",
-        backgroundColor: "rgba(77, 211, 226, 0.69)",
+        backgroundColor: "rgba(30, 121, 100, 0.78)",
         boxShadow: "0 6px 20px rgba(23, 195, 172, 0.1)",
-        color: "#333",
+        color: "white",
       }}
     >
       <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, mb: 8 }}>

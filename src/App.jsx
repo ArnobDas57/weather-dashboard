@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import { Box } from "@mui/material";
 import axios from "axios";
 import SearchBar from "./components/SearchBar";
@@ -9,12 +9,14 @@ import Footer from "./components/Footer";
 import Forecastboard from "./components/Forecastboard";
 import InfoBoard from "./components/InfoBoard";
 import WelcomeMessage from "./components/WelcomeMessage";
-import Silk from "./components/Silk";
+
+export const ScrollContext = createContext();
 
 function App() {
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [tempUnit, setTempUnit] = useState("C");
+  const resultsRef = useRef(null);
 
   // State variables for weather data
   const [weatherDescription, setWeatherDescription] = useState("");
@@ -92,52 +94,84 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (forecastData !== null && resultsRef.current) {
+      resultsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [resultsRef, forecastData]);
+
   return (
-    <>
-      
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: city || errorMessage ? "flex-start" : "center",
-          minHeight: "100vh",
-          padding: "2rem",
-          boxSizing: "border-box",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <Header />
+    <Box
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
+        backdropFilter: "blur(8px)",
+        borderRadius: "12px",
+        zIndex: 1,
+        padding: "2rem",
+      }}
+    >
+      <ScrollContext.Provider value={{ resultsRef }}>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: city || errorMessage ? "flex-start" : "center",
+            minHeight: "100vh",
+            padding: "2rem",
+            boxSizing: "border-box",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <Header />
 
-        <SearchBar
-          sendDataToParent={handleDataFromSearchBar}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-          setErrorMessage={setErrorMessage}
-        />
-        <ToggleSwitch tempUnit={tempUnit} onTempChange={onTempChange} />
-
-        {!city && !errorMessage && <WelcomeMessage />}
-        {errorMessage && <Error errorMessage={errorMessage} />}
-
-        {city && !errorMessage && !isLoading && (
-          <>
-            <InfoBoard
-              weatherDescription={weatherDescription}
-              windSpeed={windSpeed}
-              humidity={humidity}
-              temperature={temperature}
-              icon={icon}
-              city={city}
-              tempUnit={tempUnit}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 3,
+              marginBottom: 5,
+            }}
+          >
+            <SearchBar
+              sendDataToParent={handleDataFromSearchBar}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              setErrorMessage={setErrorMessage}
             />
-            <Forecastboard forecastData={forecastData} tempUnit={tempUnit} />
-          </>
-        )}
-      </Box>
-      <Footer />
-    </>
+            <ToggleSwitch
+              tempUnit={tempUnit}
+              onTempChange={onTempChange}
+              sx={{ mt: 2 }}
+            />
+          </Box>
+
+          {!city && !errorMessage && <WelcomeMessage />}
+          {errorMessage && <Error errorMessage={errorMessage} />}
+
+          {city && !errorMessage && !isLoading && (
+            <Box ref={resultsRef}>
+              <InfoBoard
+                weatherDescription={weatherDescription}
+                windSpeed={windSpeed}
+                humidity={humidity}
+                temperature={temperature}
+                icon={icon}
+                city={city}
+                tempUnit={tempUnit}
+              />
+              <Forecastboard forecastData={forecastData} tempUnit={tempUnit} />
+            </Box>
+          )}
+        </Box>
+        <Footer />
+      </ScrollContext.Provider>
+    </Box>
   );
 }
 

@@ -85,10 +85,24 @@ const SearchBar = ({
                   onClick={searchCity}
                   sx={{
                     background:
-                      "linear-gradient(to bottom,rgb(159, 185, 237) 0%,rgb(56, 116, 221) 100%)",
-                    "&:hover": {
-                      background:
-                        "linear-gradient(to bottom,rgb(59, 81, 123) 0%,rgb(41, 89, 171) 100%)",
+                      "linear-gradient(-45deg,rgb(5, 65, 244),rgb(133, 205, 244), rgb(5, 65, 244), rgb(133, 205, 244))",
+                    backgroundSize: "400% 400%",
+                    ":hover": {
+                      backgroundPosition: "100% 50%",
+                      boxShadow: "0 4px 20px rgb(138, 166, 206)",
+                      transform: "scale(1.05)",
+                    },
+                    animation: "gradientShift 2s linear infinite",
+                    "@keyframes gradientShift": {
+                      "0%": {
+                        backgroundPosition: "0% 50%",
+                      },
+                      "50%": {
+                        backgroundPosition: "100% 50%",
+                      },
+                      "100%": {
+                        backgroundPosition: "0% 50%",
+                      },
                     },
                   }}
                 >

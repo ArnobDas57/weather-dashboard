@@ -1,6 +1,13 @@
 import React from "react";
 import { Typography, Box, Stack } from "@mui/material";
 import { Zap, Cloud, Sun, Snowflake, CloudRainWind } from "lucide-react";
+import { keyframes } from "@emotion/react";
+
+const gradientAnimation = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
 
 const WelcomeMessage = () => {
   return (
@@ -40,9 +47,15 @@ const WelcomeMessage = () => {
         sx={{
           textAlign: "center",
           fontWeight: 300,
-          fontStyle: "italic",
           letterSpacing: "0.05em",
-          textShadow: "2px 2px 4px rgba(212, 255, 175, 0.87)",
+          textShadow: "2px 2px 4px rgba(58, 9, 82, 0.87)",
+          background:
+            "linear-gradient(90deg, #4079ff, #40ffaa, #4079ff, #40ffaa)",
+          backgroundSize: "200% 100%",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          paddingY: 1,
+          animation: `${gradientAnimation} 3s linear infinite`,
           mb: 1,
         }}
       >
